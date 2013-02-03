@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="never">
+<!-- This style was edited with the Visual CSL Editor (http://editor.citationstyles.org/visualEditor/) -->
+  <info>
+    <title>Harvard (University Of Liverpool) R15</title>
+    <title-short>SW Harvard</title-short>
+    <id>http://www.zotero.org/styles/harvard-university-of-liverpool-r15</id>
+    <link rel="self" href="http://www.zotero.org/styles/harvard-university-of-liverpool-r15"/>
+    <author>
+      <name>Scott Wagstaff</name>
+      <email>scott@thewagstaffs.us</email>
+    </author>
+    <updated>2013-02-03T09:35:42+00:00</updated>
+  </info>
+  <macro name="Citation Author">
+    <names variable="author">
+      <name form="short" and="symbol" delimiter-precedes-last="never" et-al-min="4" initialize-with="."/>
+      <et-al/>
+      <substitute>
+        <names variable="editor"/>
+        <names variable="translator"/>
+        <text variable="title" font-style="italic"/>
+      </substitute>
+    </names>
+  </macro>
+  <macro name="Bibliography Author">
+    <names variable="author">
+      <name and="symbol" delimiter-precedes-last="always" et-al-min="4" initialize-with="." name-as-sort-order="all"/>
+      <et-al/>
+      <substitute>
+        <names variable="editor"/>
+        <names variable="translator"/>
+        <text variable="title" font-style="italic"/>
+      </substitute>
+    </names>
+  </macro>
+  <macro name="Bib title">
+    <choose>
+      <if match="any" variable="author">
+        <text variable="title" font-style="normal" prefix=" '" suffix="'"/>
+      </if>
+      <else-if match="any" variable="editor">
+        <text variable="title" prefix=" '" suffix="'"/>
+      </else-if>
+      <else>
+        <text value=""/>
+      </else>
+    </choose>
+  </macro>
+  <macro name="Online Bib">
+    <text term="online" text-case="capitalize-first" prefix=" [" suffix="]."/>
+    <text variable="URL" prefix=" Available at: "/>
+    <group prefix=" (" suffix=")">
+      <text term="accessed" text-case="capitalize-first" suffix=": "/>
+      <date delimiter="" variable="accessed">
+        <date-part name="day" form="ordinal"/>
+        <date-part name="month" prefix=" "/>
+        <date-part name="year" prefix=" "/>
+      </date>
+    </group>
+  </macro>
+  <macro name="Bib sort">
+    <names variable="author">
+      <substitute>
+        <text variable="title"/>
+      </substitute>
+    </names>
+  </macro>
+  <citation>
+    <layout prefix="(" suffix=")">
+      <text macro="Citation Author"/>
+      <date form="text" variable="issued" prefix=", "/>
+    </layout>
+  </citation>
+  <bibliography>
+    <layout>
+      <group>
+        <text macro="Bibliography Author"/>
+        <date date-parts="year" form="text" variable="issued" prefix=" (" suffix=")"/>
+        <text macro="Bib title"/>
+        <text variable="publisher" text-case="title" font-style="italic" prefix=" "/>
+      </group>
+      <choose>
+        <if type="webpage" match="any">
+          <text macro="Online Bib"/>
+        </if>
+        <else>
+          <text variable="volume" prefix=" "/>
+          <text variable="issue" prefix=" (" suffix=")"/>
+          <text variable="page" prefix=", pp."/>
+        </else>
+      </choose>
+    </layout>
+    <sort>
+      <key macro="Bib sort"/>
+      <key variable="issued"/>
+    </sort>
+  </bibliography>
+</style>
